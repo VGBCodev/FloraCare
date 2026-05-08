@@ -1,0 +1,6 @@
+{
+  "name": "FloraCare",
+  "description": "Um assistente de jardinagem com IA que identifica plantas por fotos e fornece instruções de cuidado personalizadas, diagnósticos e dicas de jardinagem.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["Identificação de Plantas por IA", "Documentação de Cuidados", "Diagnóstico de Saúde", "Comunidade de Plantas"]
+}

@@ -1,0 +1,128 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public and private user profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "email": { "type": "string" },
+        "bio": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "email", "createdAt"]
+    },
+    "Post": {
+      "title": "Community Post",
+      "description": "A tip, question, or showcase shared by a user",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorPhoto": { "type": "string" },
+        "content": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "likesCount": { "type": "number" },
+        "commentsCount": { "type": "number" },
+        "plantType": { "type": "string" },
+        "groupId": { "type": "string" }
+      },
+      "required": ["authorId", "content", "createdAt", "likesCount", "commentsCount"]
+    },
+    "Like": {
+      "title": "Post Like",
+      "description": "A like from a user on a post",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "createdAt"]
+    },
+    "Comment": {
+      "title": "Post Comment",
+      "description": "A comment on a community post",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorPhoto": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["postId", "authorId", "authorName", "content", "createdAt"]
+    },
+    "UserPlant": {
+      "title": "User's Plant",
+      "description": "A plant in the user's personal garden",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "commonName": { "type": "string" },
+        "scientificName": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "addedAt": { "type": "string", "format": "date-time" },
+        "careInstructions": { "type": "object" }
+      },
+      "required": ["ownerId", "commonName", "addedAt"]
+    },
+    "CommunityGroup": {
+      "title": "Community Group",
+      "description": "A themed group for plant enthusiasts",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "creatorId": { "type": "string" },
+        "membersCount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "creatorId", "createdAt", "membersCount"]
+    },
+    "GroupMember": {
+      "title": "Group Member",
+      "description": "A user who has joined a community group",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "joinedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "joinedAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "posts/{postId}": {
+      "schema": "Post",
+      "description": "Community posts"
+    },
+    "posts/{postId}/likes/{userId}": {
+      "schema": "Like",
+      "description": "Likes on a post"
+    },
+    "posts/{postId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Comments on a specific post"
+    },
+    "users/{userId}/plants/{plantId}": {
+      "schema": "UserPlant",
+      "description": "User personal garden"
+    },
+    "groups/{groupId}": {
+      "schema": "CommunityGroup",
+      "description": "Community groups"
+    },
+    "groups/{groupId}/members/{userId}": {
+      "schema": "GroupMember",
+      "description": "Members of a community group"
+    }
+  }
+}
